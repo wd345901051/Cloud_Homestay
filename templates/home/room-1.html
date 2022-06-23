@@ -1,0 +1,39 @@
+{{define "home/room-1.html"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="static/css1/room-1.css">
+</head>
+
+<body>
+   <div class="container" style="padding-left: 0;padding-right: 0;">
+      <div class="box-container">
+         {{range $key,$value := .roomrank}}
+         <div class="box">
+            <div class="left-img">
+               <a target="blank" href="roominfo?title={{$value.Title}}">
+                  <img src="{{$value.Img}}" alt="">
+               </a>
+            </div>
+            <div class="right-text" style="float: left;width: 400px;height: 30rem;">
+               <h3 class="title">{{$value.Title}}</h3>
+               <p>这是套房{{$key}}</p>
+            </div>
+            <div class="price" style="float: right;width: 100px;height: 30rem;margin: 5rem 0 5rem 0;">
+               <h1>￥{{$value.Price}}起</h1>
+               <a href="roominfo?title={{$value.Title}}" target="_top" class="link-btn">详情</a>
+            </div>
+         </div>
+         {{end}}
+      </div>
+   </div>
+</body>
+
+
+</html>
+{{end}}
