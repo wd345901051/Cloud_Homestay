@@ -118,7 +118,7 @@ window.onscroll = () => {
         document.querySelector('.header').classList.remove('active');
     }
 }
-/*****************日期选择限制****************8 */
+/*****************日期选择限制**************** */
 var date = new Date();
 var year = date.getFullYear();
 var month = ('0' + (date.getMonth() + 1)).slice(-2);
@@ -128,10 +128,10 @@ var time = year + '-' + month + '-' + day;
 var time1 = year + '-' + month + '-' + day1;
 
 //限制不能选择今天之后的日期（加上属性max）
-document.getElementById('time').setAttribute('min', time1);
+document.getElementById('timein').setAttribute('min', time1);
 
 //限制不能选择今天之后的日期（加上属性max）
-document.getElementById('time1').setAttribute('min', time1);
+document.getElementById('timeout').setAttribute('min', time1);
 
 
 

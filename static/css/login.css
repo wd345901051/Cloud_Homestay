@@ -261,30 +261,6 @@ body {
     transform: scale(1.2);
 }
 
-.slidershow--image:nth-child(1) {
-    -webkit-animation-name: kenburns-1;
-    animation-name: kenburns-1;
-    z-index: 3;
-}
-
-.slidershow--image:nth-child(2) {
-    -webkit-animation-name: kenburns-2;
-    animation-name: kenburns-2;
-    z-index: 2;
-}
-
-.slidershow--image:nth-child(3) {
-    -webkit-animation-name: kenburns-3;
-    animation-name: kenburns-3;
-    z-index: 1;
-}
-
-.slidershow--image:nth-child(4) {
-    -webkit-animation-name: kenburns-4;
-    animation-name: kenburns-4;
-    z-index: 0;
-}
-
 @-webkit-keyframes kenburns-1 {
     0% {
         opacity: 1;

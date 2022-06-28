@@ -860,6 +860,13 @@ input.class1 {
   border: 0px;
 }
 
+.orderform{
+  padding: 2px 5px;
+  color: #fff;
+  background: #FC3307;
+  border-width: 1px;
+}
+
 /*********************订阅*******************/
 section {
   padding: 5rem 1rem;

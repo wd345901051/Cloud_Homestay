@@ -12,7 +12,10 @@ import (
 func Attention(c *gin.Context) {
 	// 直接处理订阅任务
 	us, _ := c.Get("user")
-	user := us.(models.UserBasic)
+	user := new(models.UserBasic)
+	if us != nil {
+		user = helper.GetUserStruct(us.(string))
+	}
 	err := models.DB.Model(new(models.UserBasic)).Where("email = ?", user.Email).Update("attention", 1).Error
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
