@@ -3,7 +3,6 @@ package service
 import (
 	"cloud_homestay/helper"
 	"cloud_homestay/models"
-	"fmt"
 	"net/http"
 	"path"
 	"strconv"
@@ -55,61 +54,6 @@ func Creat(c *gin.Context) {
 // 修改房间的提交页面
 func Change(c *gin.Context) {
 	c.HTML(http.StatusOK, "admin/changeroom.html", gin.H{})
-}
-
-// 创建房间业务
-func CreatRoom(c *gin.Context) {
-	title := c.PostForm("title")
-	info := c.PostForm("info")
-	content := c.PostForm("content")
-	img, err := c.FormFile("img")
-	var cnt int64
-	if err != nil {
-		c.JSON(http.StatusOK, gin.H{
-			"code": -1,
-			"msg":  "Get Img File Error:" + err.Error(),
-		})
-		return
-	}
-	dst := path.Join("static/images", fmt.Sprint("room-", cnt+1, ".png"))
-	c.SaveUploadedFile(img, dst)
-	if title == "" || info == "" || content == "" {
-		c.HTML(http.StatusOK, "temp/login_info.html", gin.H{
-			"code": -1,
-			"msg":  "关键信息不可为空",
-			"href": "creat",
-		})
-		return
-	}
-	err = models.DB.Model(new(models.RoomBasic)).Count(&cnt).Error
-	if err != nil {
-		c.JSON(http.StatusOK, gin.H{
-			"code": -1,
-			"msg":  "Get Img Count Error:" + err.Error(),
-		})
-		return
-	}
-	for {
-		if helper.FileExists(dst) {
-			cnt++
-		} else {
-			dst = path.Join("static/images", fmt.Sprint("room-", cnt, ".png"))
-			break
-		}
-	}
-
-	room := &models.RoomBasic{
-		Title:   title,
-		Info:    info,
-		Content: content,
-		Img:     dst,
-	}
-	models.DB.Create(room)
-	c.HTML(http.StatusOK, "login_info.html", gin.H{
-		"code": 200,
-		"msg":  "添加room成功!",
-		"href": "creat",
-	})
 }
 
 // 删除房间业务
@@ -186,12 +130,24 @@ func RoomAdd(c *gin.Context) {
 	content := c.PostForm("content")
 	room_num := c.PostForm("room_num")
 
+	dst := path.Join("./static/images", "room-"+room_num+".png")
+	img, err := c.FormFile("img")
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code": -1,
+			"msg":  "Creat Img Error" + err.Error(),
+		})
+		return
+	} else {
+		c.SaveUploadedFile(img, dst)
+	}
 	room := &models.RoomBasic{
 		Title:   title,
 		Info:    info,
 		Content: content,
 		Price:   pr,
 		Type:    t,
+		Img:     "../" + dst,
 		RoomNum: room_num,
 	}
 	models.DB.Create(&room)

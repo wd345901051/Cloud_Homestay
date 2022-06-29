@@ -1,5 +1,5 @@
 
-//通过name属性值获取密码文本框
+//通过id属性值获取密码文本框
 let pwd = document.getElementById('password');
 //通过id属性值获取显示密码复选框
 let chk = document.getElementById('showPwd');

@@ -182,7 +182,7 @@
                     <!--增加的模态框-->
                     <div class="modal addfade" id="addmodal">
                         <div class="modal-dialog">
-                            <form action="" method="post" class="roomadd" enctype="multipart/form-data">
+                            <form action="../roomadd" method="post" class="roomadd" enctype="multipart/form-data">
                             <div class="modal-content">
                                 <div class="modal-header" style="padding-top: 20px;">
                                     <i>X</i>
@@ -196,7 +196,7 @@
                                         文章: <textarea name="content" id="" cols="30" rows="10"></textarea>
                                     </p>
                                     <p>
-                                        图片：<input type="file" />
+                                        图片：<input type="file" name="img">
                                     </p>
                                     <p>
                                         简介：<input name="info" type="text" />
@@ -218,7 +218,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     <div class="pageInfoBox"></div>
-                                    <button class="addButton_ok">确定</button>
+                                    <input type="submit" value="确定">
+                                    <!-- <button class="addButton_ok">确定</button> -->
                                 </div>
                             </div>
                         </form>
@@ -318,14 +319,14 @@
             });
         });
 
-        // 增加房间
-        $(document).ready(function(){
-            $(".addButton_ok").bind("click",function(){
-                alert("请刷新页面")
-                // 房间表单
-                $.post("http://127.0.0.1:8080/roomadd", $(".roomadd").serialize() );
-            });
-        });
+        // // 增加房间
+        // $(document).ready(function(){
+        //     $(".addButton_ok").bind("click",function(){
+        //         alert("请刷新页面")
+        //         // 房间表单
+        //         $.post("http://127.0.0.1:8080/roomadd", $(".roomadd").serialize() );
+        //     });
+        // });
 
     </script>
 </body>
