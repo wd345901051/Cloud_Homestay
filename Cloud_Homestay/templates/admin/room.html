@@ -1,0 +1,335 @@
+{{define "admin/room.html"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
+    <link href="../static/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="../static/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/css/studentInformationManage.css">
+    <link href="../static/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="../static/css/animate.css" rel="stylesheet">
+    <link href="../static/css/style.css?v=2.2.0" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-header">
+
+                        <div class="dropdown profile-element"> <span>
+                            <img alt="image" class="img-circle" src="{{.user.Icon}}" />
+                             </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{.user.Name}}</strong>
+                                    {{if eq .user.Isadmin 1}}
+                             </span>  <span class="text-muted text-xs block">超级管理员 <b class="caret"></b></span> </span>
+                             {{else if eq .user.Isadmin 0}}
+                            </span>  <span class="text-muted text-xs block">普通用户 <b class="caret"></b></span> </span>
+                             {{end}}
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="../rmsession">安全退出</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <li>
+                            <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户信息</span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="user">信息中心</a>
+                                </li>
+                            </ul>
+                        </li>
+    
+                       
+                       
+                        <li>
+                            <a href="index.html#"><i class="fa fa-sitemap"></i> <span class="nav-label">酒店管理 </span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="room">房间管理</a>
+                                </li>
+                                <li><a href="goods">物品管理</a>
+                                </li>
+                                <li><a href="equip">设备管理</a>
+                                </li>
+                            </ul>
+                            </li>
+                             <li>
+                            <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">订单管理</span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="order">订单中心</a>
+                                </li>
+                                <li><a href="userct">数据视图</a>
+                                </li>
+    
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">评价管理 </span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="message">评价中心</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+    
+                </div>
+            </nav>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li>
+                            <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i class="fa fa-home"></i></a>欢迎来到云舍印象</span>
+                        </li>
+
+
+
+                        <li>
+                            <a href="login.html">
+                                <i class="fa fa-sign-out"></i> 退出
+                            </a>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+            
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>房间管理</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.html">主页</a>
+                        </li>
+                        <li>
+                            <strong>房间管理</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+
+            <div class="wrapperBox" >
+                <div class="header">
+                    <div class="headerTitle">
+                        <div class="headerLine">房间管理</div>
+                    </div>
+                    <div class="down">
+                    <div class="headerButton" style="text-align: right;">
+                        <button class="addButton">新增</button>
+                    </div>
+               </div>
+                </div>
+                <div class="container">
+                    <table id="containerTable" style="margin-left: 30px;">
+                        <thead class="tableHeaher">
+                        <tr>
+                            <th>序号</th>
+                            <th>图片</th>
+                            <th>简介</th>
+                            <th>价格</th>
+                            <th>类别</th>
+                            <th>房间号</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tdata" style="width:600px">
+
+                        {{range $key,$value := .rooms}}
+                            <tr class="trHover">
+                                <td class="stuSequence">{{$key}}</td>
+                                <!-- <td class="stuId">11503080210</td> -->
+                                <td class="stuId"><img alt="image" class="img01—circle" src="{{$value.Img}}" /></td> 
+                                <td class="stuName">{{$value.Title}}</td>
+                                <td class="stuAcademy">{{$value.Price}}￥/晚</td>
+                                {{if eq $value.Type 0}}
+                                    <td class="stuMajor">单人间</td>
+                                {{else if eq $value.Type 1}}
+                                    <td class="stuMajor">双人间</td>
+                                {{else if eq $value.Type 2}}
+                                    <td class="stuMajor">套房</td>
+                                {{end}}
+                                
+                                <td class="stuYear">{{$value.RoomNum}}</td>
+                                {{if eq $value.RoomStatus 0}}
+                                <td class="stuClass">未入住</td>
+                                {{else if eq $value.RoomStatus 1}}
+                                <td class="stuClass">已入住</td>
+                                {{end}}
+                                <td>
+                                    <a class="deleteButton">删除</a>
+                                </td>
+                            </tr>
+                                {{end}}
+                            
+
+                        </tfoot>
+                        </tbody>
+                    </table>
+                    <!--增加的模态框-->
+                    <div class="modal addfade" id="addmodal">
+                        <div class="modal-dialog">
+                            <form action="../roomadd" method="post" class="roomadd" enctype="multipart/form-data">
+                            <div class="modal-content">
+                                <div class="modal-header" style="padding-top: 20px;">
+                                    <i>X</i>
+                                    <h4>新增房间信息</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        名称：<input name="title" type="text" />
+                                    </p>
+                                    <p>
+                                        文章: <textarea name="content" id="" cols="30" rows="10"></textarea>
+                                    </p>
+                                    <p>
+                                        图片：<input type="file" name="img">
+                                    </p>
+                                    <p>
+                                        简介：<input name="info" type="text" />
+                                    </p>
+                                    <p>
+                                        价格：<input name="price" type="text" />
+                                    </p>
+                                    <p >
+                                    类型：
+                                        <select name="type" style="width:200px" >
+                                            <option value="0">单人间</option>
+                                              <option value="1">双人间</option>	
+                                              <option value="2">套房</option>
+                                        </select>
+                                    </p>
+                                    <p>
+                                        房间号：<input name="room_num" type="text" />
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="pageInfoBox"></div>
+                                    <input type="submit" value="确定">
+                                    <!-- <button class="addButton_ok">确定</button> -->
+                                </div>
+                            </div>
+                        </form>
+                        </div>
+                    </div> -->
+    
+                    <!--修改的模态框--> 
+                     <div class="modal movefade movemodal" id="movemodal">
+                        <div class="modal-dialog">
+                                <div class="modal-body">
+                                    <p>
+                                        <label for="name" >序号：</label>
+                                        <input type="text" />
+                                    </p>
+                                    <p>
+                                        <label for="name" >图片：</label>
+                                        <input type="file" />
+                                    </p>
+                                    <p>
+                                        <label for="name" >价格：</label>
+                                        <input type="text" />
+                                    </p>
+                                    <p>
+                                        <label for="name" >序号：</label>
+                                        <input type="text" />
+                                    </p>
+                                    <p>
+                                        <label for="name" style="padding-right: 15px;">类型：</label>
+                                        
+                                        <select style="width: 200px;">
+                                            <option value="saab">大床房</option>
+                                              <option value="opel">单人间</option>	
+                                              <option value="audi">情侣套房</option>
+                                        </select>
+                                    </p>
+                                    <p>
+                                        <label for="name" >房间号：</label>
+                                        <input type="text" />
+                                    </p>
+                                    <p>
+                                        <label for="name" style="padding-right: 15px;">状态：</label>
+                                        
+                                        <select style="width: 200px;">
+                                            <option value="saab">已入住</option>
+                                              <option value="opel">未入住</option>	
+                                              <option value="audi">待人住</option>
+                                        </select>
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="updatabtn_ok">保存</button>
+                                    <button class="updatabtn_no">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="foot">
+                    <div class="pageInformation">
+                        第<span id="curPage"></span>页，
+                        共<span id="countPage"></span>条，(每页显示10条)
+                        <input id="page" type="text"style="display: none" >
+                    </div>
+                    <div class="pageButton">
+                        <button id="prePageButton">上一页</button>
+                        <button id="nextPageButton">下一页</button>
+                    </div>
+                </div>
+            </div>
+
+            <script src="../static/js/jquery.min.js"></script>
+            <script src="../static/js/studentInformationManage.js"></script>
+        </div>
+    </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="../static/js/jquery-2.1.1.min.js"></script>
+    <script src="../static/js/bootstrap.min.js?v=3.4.0"></script>
+    <script src="../static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    
+    <!-- Custom and plugin javascript -->
+    <script src="../static/js/hplus.js?v=2.2.0"></script>
+    <script src="../static/js/plugins/pace/pace.min.js"></script>
+
+    <script type="text/javascript">
+        // 获取要删除元素的名称
+        $(document).ready(function(){
+            $(".deleteButton").bind("click",function(){
+                alert("请刷新页面")
+                // 房间标题
+                var name =$(this).parent().prevAll(".stuName").text();
+                $.post("http://127.0.0.1:8080/deleteroom", { title: name} );
+            });
+        });
+
+        // // 增加房间
+        // $(document).ready(function(){
+        //     $(".addButton_ok").bind("click",function(){
+        //         alert("请刷新页面")
+        //         // 房间表单
+        //         $.post("http://127.0.0.1:8080/roomadd", $(".roomadd").serialize() );
+        //     });
+        // });
+
+    </script>
+</body>
+
+</html>
+{{end}}

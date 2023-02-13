@@ -1,0 +1,356 @@
+{{define "home/index.html"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Welcome to The Cloud Homestay</title>
+   <link rel="icon" href="static/images/icon.png" sizes="32*32">
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+   <!-- bootstrap cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="static/css1/index.css">
+   <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+</head>
+
+<body>
+
+   <!-- header section starts     -->
+
+   <header class="header fixed-top">
+
+      <div class="container">
+
+         <div class="row align-items-center">
+
+            <a href="#" class="logo mr-auto"> <i class="fas fa-home fa-fw"></i> 云舍印象 </a>
+
+            <nav class="nav">
+               <a href="home">首页</a>
+               <a href="room">房间预定</a>
+               {{if eq .isadmin 1}}
+               <a href="admin/room">管理员界面</a>
+               {{end}}
+               <a href="personal">个人中心</a>
+               <a href="#contact">联系我们</a>
+            </nav>
+
+            <div class="icons" >
+               <div id="menu-btn" class="fas fa-bars"></div>
+               <div id="login-btn" class="fas fa-user">{{.name}}</div>
+               <div id="logout-btn" class="fas fa-sign-out-alt"></div>
+            </div>
+            <a href="rmsession" style="color: white;text-decoration: dashed;">退出</a>
+         </div>
+
+      </div>
+
+   </header>
+
+
+   <section class="home" id="home">
+
+      <div class="container">
+
+         <div class="row align-items-center text-center text-md-left min-vh-100">
+            <div class="col-md-6">
+               <span>Cloud Homestay</span>
+               <h3>enioy your holiday</h3>
+               <a href="room.html" class="link-btn">book now</a>
+            </div>
+         </div>
+
+      </div>
+
+   </section>
+
+   <!-- home section ends -->
+
+   <!-- about section starts  -->
+
+   <section class="about" id="about">
+
+      <div class="container">
+
+         <div class="row align-items-center">
+            <div class="col-md-6">
+               <img
+                  src="static/images/yard-01.png"
+                  class="w-100" alt="">
+            </div>
+            <div class="col-md-6">
+               <span>历时三年，苍山下三百年老宅的苏醒 </span>
+               <p> 大理银桥与苍山三阳峰之间,农舍与田园之间,人与荒野林莽之间,红尘与净土之间,老白操持三年的「云舍印象」,更像是他个人玩儿的一件跨界艺术品。</p>
+               <P> 关于酒店主理人老白：他是商业设计师、画家,也爱机车、古董收藏、艺术装置,在大理,他更是个不知疲倦的超级玩家，三年后的一个阳光烂漫的上午,
+                  他说可以聚了，站在院子里给朋友们做披萨，披萨从他砌起的火炉里铲进铲出，白木田欢快的在院子里跑进跑出，居住、spa、画廊、银器手作、世界厨房，
+                  集于这三个曾经颓败的院落，而庭院深深，深几许？</p>
+               <div class="icons-container">
+                  <div class="icons">
+                     <i class="fas fa-utensils"></i>
+                     <h3>delicious food</h3>
+                  </div>
+                  <div class="icons">
+                     <i class="fas fa-bus-alt"></i>
+                     <h3>free pick-up service</h3>
+                  </div>
+                  <div class="icons">
+                     <i class="fas fa-spa"></i>
+                     <h3>Spa</h3>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+      </div>
+
+   </section>
+
+   <!-- about section ends -->
+
+
+
+   <!-- blogs section starts  -->
+
+   <section class="blogs" id="blogs">
+
+      <h1 class="heading"> 庭院一角 </h1>
+
+      <div class="box-container container">
+
+         <div class="box">
+            <div class="image">
+               <img src="static/images/yard-01.png" alt="">
+            </div>
+            <div class="content">
+               <h3>酒店外部</h3>
+               <p>隐于千年茶马古道旁
+
+                  落于田野与庙宇之间的十亩森林中
+
+                  两百年四进白族传统宅院改造</p>
+            </div>
+         </div>
+
+         <div class="box">
+            <div class="image">
+               <img src="static/images/yard-02.png" alt="">
+            </div>
+            <div class="content">
+               <h3>庭院一角</h3>
+               <p>小隐隐于野，独享院落，听风看月</p>
+            </div>
+         </div>
+
+         <div class="box">
+            <div class="image">
+               <img src="static/images/yard-03.png" alt="">
+            </div>
+            <div class="content">
+               <h3>茶室</h3>
+               <p>酒店私享木田有机茶园采摘制作品茗</p>
+            </div>
+         </div>
+
+      </div>
+
+   </section>
+
+   <!-- blogs section ends -->
+
+   <!-- menu section starts  -->
+
+   <section class="menu" id="menu">
+
+      <h1 class="heading"> 一屋四季 </h1>
+
+      <div class="container box-container">
+
+         {{range $key,$value := .rooms}}
+         <div class="box">
+            <img src="{{$value.Img}}" alt="" width="250px" height="150px">
+            <h3>{{$value.Title}}</h3>
+            <a href="roominfo?title={{$value.Title}}" class="link-btn">详情</a>
+         </div>
+         {{end}}
+
+      </div>
+      <div style="text-align: right;">
+         <a href="room" class="link-btn" style="width: 12rem; height:5rem;  margin-right: 12rem; ">更多>></a>
+      </div>
+
+   </section>
+
+   <!-- menu section ends -->
+
+   <!-- gallery section starts  -->
+
+   <section class="gallery" id="gallery">
+
+      <h1 class="heading"> 四方食事 </h1>
+
+      <div class="box-container container">
+
+         <div class="box">
+            <img src="static/images/food-01.png" alt="">
+            <div class="content">
+               <h3>白族妈妈家常菜</h3>
+               <p>唤起你的味蕾</p>
+               <a href="#" class="link-btn">更多</a>
+            </div>
+         </div>
+
+         <div class="box">
+            <img src="static/images/food-02.png" alt="">
+            <div class="content">
+               <h3>意式炭火烤肉/烤鸡/烤披萨</h3>
+               <p>可以亲自制作披萨哦</p>
+               <a href="#" class="link-btn">更多</a>
+            </div>
+         </div>
+
+         <div class="box">
+            <img src="static/images/food-03.png" alt="">
+            <div class="content">
+               <h3>森林下午茶</h3>
+               <p>独处的山中静谧时光</p>
+               <a href="#" class="link-btn">更多</a>
+            </div>
+         </div>
+
+         <div class="box">
+            <img src="static/images/food-04.png" alt="">
+            <div class="content">
+               <h3>中餐厅</h3>
+               <p>让你随时可以吃到家常菜</p>
+               <a href="#" class="link-btn">更多</a>
+            </div>
+         </div>
+
+         <div class="box">
+            <img src="static/images/food-05.png" alt="">
+            <div class="content">
+               <h3>户外长廊</h3>
+               <p>独享晚饭时光</p>
+               <a href="#" class="link-btn">更多</a>
+            </div>
+         </div>
+
+         <div class="box">
+            <img src="static/images/food-06.png" alt="">
+            <div class="content">
+               <h3>树屋</h3>
+               <p>坐在顶上喝茶的树屋，独立的温暖</p>
+               <a href="#" class="link-btn">更多</a>
+            </div>
+         </div>
+
+      </div>
+
+   </section>
+
+   <!-- gallery section ends -->
+
+
+   <!-- contact section starts  -->
+
+   <section class="contact" id="contact">
+
+      <h1 class="heading"> 联系我们 </h1>
+
+      <div class="container">
+
+         <div class="contact-info-container">
+
+            <div class="box">
+               <i class="fas fa-phone"></i>
+               <h3>电话</h3>
+               <p>0872-5379425</p>
+            </div>
+
+            <div class="box">
+               <i class="fas fa-envelope"></i>
+               <h3>邮箱</h3>
+               <p>me_rhythm@163.com</p>
+               <p>1256157634@qq.com</p>
+            </div>
+
+            <div class="box">
+               <i class="fas fa-map"></i>
+               <h3>地址</h3>
+               <p>云南省大理市银桥镇中银村7社-17号</p>
+            </div>
+
+         </div>
+
+         <div class="row align-items-center">
+
+            <div class="col-md-6 mb-5 mb-md-0" style="position: inherit;">
+               <div class="map w-100" id="location" width="20%" height="10%" style="border:0; position: fixed;"></div>
+            </div>
+
+
+            <form action="" class="col-md-6">
+               <h3>get in touch</h3>
+               <input type="text" placeholder="姓名" class="box">
+               <input type="email" placeholder="邮箱地址" class="box">
+               <input type="text" placeholder="电话号码" class="box">
+               <input type="text" placeholder="入住人数" class="box">
+               <textarea name="" placeholder="分享你的出行计划..." class="box" id="" cols="30" rows="10"></textarea>
+               <input type="submit" value="提交" class="link-btn">
+            </form>
+
+         </div>
+
+      </div>
+
+   </section>
+
+   <!-- contact section ends -->
+
+   <!-- newsletter section starts  -->
+
+   <section class="newsletter">
+      <div class="container">
+         <h3>一期一会</h3>
+         <p>订阅我们，以关注最新动态</p>
+         <form action="attention" method="post" enctype="multipart/form-data" style="width: 120px;">
+            <input type="submit" value="订阅" class="link-btn">
+         </form>
+      </div>
+   </section>
+
+   <!-- newsletter section ends -->
+
+   <!-- footer section starts  -->
+
+   <section class="footer container">
+
+      <a href="#" class="logo"> <i class="fas fa-home fa-fw"></i> 云舍印象 </a>
+
+      <p class="credit"> created by <span>mr. Bai </span> | Copyright 2019-2022</p>
+
+      <div class="share">
+         <a href="#" class="fab fa-airbnb"></a>
+         <a href="#" class="fab fa-weibo"></a>
+         <a href="#" class="fab fa-weixin"></a>
+         <a href="#" class="fab fa-fonticons"></a>
+      </div>
+
+   </section>
+
+   <!-- footer section ends -->
+
+   <!-- custom js file link  -->
+   <script src="static/js1/index.js"></script>
+
+</body>
+
+</html>
+{{end}}

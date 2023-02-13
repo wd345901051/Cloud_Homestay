@@ -1,0 +1,21 @@
+{{define "temp/login_info.html"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="msg" hidden="hidden">{{.msg}}</p>
+    <p id="href" hidden="hidden">{{.href}}</p>
+    <script>
+        var msg = document.getElementById('msg')
+        var href = document.getElementById('href')
+        alert(msg.innerHTML)
+        window.location.replace(href.innerHTML)
+    </script>
+</body>
+</html>
+{{end}}

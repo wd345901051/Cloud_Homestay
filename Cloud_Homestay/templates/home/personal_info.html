@@ -1,0 +1,219 @@
+{{define "home/personal_info.html"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to The Cloud Homestay</title>
+    <link rel="icon" href="static/images/icon.png" sizes="32*32">
+    <link href="static/css1/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css1/font-awesome.css" rel="stylesheet">
+    <link href="static/css1/animate.css" rel="stylesheet">
+    <link href="static/css1/style.css?v=2.2.0" rel="stylesheet">
+    <link href="static/css1/personal_info.css" rel="stylesheet">
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- bootstrap cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <header class="header fixed-top">
+                <div class="container">
+                   <div class="row align-items-center">
+                      <a href="#" class="logo mr-auto"> <i class="fas fa-home fa-fw"></i> 云舍印象 </a>
+                      <nav class="nav">
+                        <a href="home">首页</a>
+                        <a href="room">房间预定</a>
+                        {{if eq .isadmin 1}}
+                        <a href="admin/room">管理员界面</a>
+                        {{end}}
+                        <a href="personal">个人中心</a>
+                        <a href="#contact">联系我们</a>
+                     </nav>
+          
+                      <div class="icons" >
+                         <div id="menu-btn" class="fas fa-bars"></div>
+                         <div id="login-btn" class="fas fa-user">{{.name}}</div>
+                         <div id="logout-btn" class="fas fa-sign-out-alt"></div>
+                      </div>
+                      <a href="rmsession" style="color: white;text-decoration: dashed;">退出</a>
+                   </div>
+          
+                </div>
+          
+             </header>
+
+            <div class="wrapper wrapper-content">
+                <div class="row animated fadeInRight">
+                    <div class="col-md-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>个人资料</h5>
+                            </div>
+                            <div>
+                                <div class="ibox-content no-padding border-left-right"
+                                    style="justify-content: center;display: flex;">
+                                    <img alt="image" class="img-responsive" src="{{.user.Icon}}" width="100"
+                                        height="100"
+                                        style="width:100px; height:100px; border-radius:100%;margin-top: 10px;">
+                                </div>
+                                <div class="ibox-content profile-content">
+                                    <h4 style="text-align: center;"><strong>{{.user.Name}}</strong></h4>
+                                    <h5>
+                                        关于我
+                                    </h5>
+                                    <p>
+                                        主人很懒，什么都没留下...
+                                    </p>
+                                    <div class="row m-t-lg">
+                                        <div class="col-md-4" style="text-align: center;">
+                                            <span class="fas fa-edit"></span>
+                                            <h5><a href="#">账号信息</a></h5>
+                                        </div>
+                                        <div class="col-md-4" style="text-align: center;">
+                                            <span class="fas fa-table"></span>
+                                            <h5><a href="#">我的订单</a></h5>
+                                        </div>
+                                        <div class="col-md-4" style="text-align: center;">
+                                            <span class="fas fa-comment-alt"></span>
+                                            <h5><a href="#">我的评价</a></h5>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="user-button">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <button type="button" class="btn btn-primary btn-sm btn-block"><i class="fas fa-envelope"></i> 发送消息</button>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-envelope"></i> 赞助</button>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>个人信息</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="profile.html#">
+                                        <i class="fa fa-wrench"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-user">
+                                        <li><a href="profile.html#">选项1</a>
+                                        </li>
+                                        <li><a href="profile.html#">选项2</a>
+                                        </li>
+                                    </ul>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div>
+                                    <div class="feed-activity-list">
+                                        <h5>我的订单</h5>
+                                        <div class="feed-element">
+                                            {{if eq .cnt 0}}
+                                            <h3 style="line-height: 5rem;">空空如也</h3>
+                                            {{else}}
+                                            <div>
+                                                {{range $key,$value := .orders}}
+                                                房间编号<span style="margin-right: 10px;">{{$value.RoomId}}</span>入住时间：<span style="margin-right: 10px;">{{$value.CreatedAt}}</span>入住人数：<span style="margin-right: 10px;">{{$value.PeopleCnt}}</span> <br>
+                                                {{end}}
+                                            </div>
+                                            {{end}}
+                                        </div>
+                                        <h5>我的评价</h5>
+                                        {{range $key,$value := .comments}}
+                                        <div class="feed-element">
+                                            <a href="profile.html#" class="pull-left">
+                                                <img alt="image" class="img-circle" src="{{$value.UserInfo.Icon}}">
+                                            </a>
+                                            <div class="media-body ">
+                                                <small class="pull-right text-navy">5赞</small>
+                                                <strong>{{$value.UserInfo.Name}}</strong><strong>发表了评论</strong>
+                                                <br>
+                                                <small class="text-muted">{{$value.Content}}</small>
+                                                <div name="id" class="id" style="display:none">{{$value.ID}}</div>
+                                                <div class="actions">
+                                                    <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞
+                                                    </a>
+                                                    <a class="btn btn-xs btn-white delete"><i class="fa fa-delete"></i> 删除</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{end}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <section class="newsletter">
+                    <div class="container" style="width: 100%;">
+                        <h3>一期一会</h3>
+                        <p>订阅我们，以关注最新动态</p>
+                        <form action="attention" method="post" enctype="multipart/form-data" style="width: 120px;">
+                            <input type="submit" value="订阅" class="link-btn">
+                         </form>
+                    </div>
+                </section>
+                <a href="#" class="logo"> <i class="fas fa-home fa-fw"></i> 云舍印象 </a>
+                <p class="credit"> created by <span>mr. Bai </span> | Copyright 2019-2022</p>
+                <div class="share">
+                    <a href="#" class="fab fa-airbnb"></a>
+                    <a href="#" class="fab fa-weibo"></a>
+                    <a href="#" class="fab fa-weixin"></a>
+                    <a href="#" class="fab fa-fonticons"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- <script src="js/jquery-3.0.0.min.js"></script> -->
+    <!-- Mainly scripts -->
+    <script src="static/js1/jquery-2.1.1.min.js"></script>
+    <script>
+        // 获取要删除元素的名称
+    $(document).ready(function(){
+        $(".delete").bind("click",function(){
+            alert("请刷新页面")
+            // 房间标题
+            var name =$(this).parent().prevAll(".id").text();
+            $.post("http://127.0.0.1:8080/deletcomment", { id: name} );
+        });
+    });
+    </script>
+    <script src="static/js1/bootstrap.min.js?v=3.4.0"></script>
+    <script src="static/js1/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="static/js1/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- Custom and plugin javascript -->
+    <script src="static/js1/hplus.js?v=2.2.0"></script>
+    <script src="static/js1/plugins/pace/pace.min.js"></script>
+    <!-- Peity -->
+    <script src="static/js1/plugins/peity/jquery.peity.min.js"></script>
+    <!-- Peity -->
+    <script src="static/js1/demo/peity-demo.js"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+    <!--统计代码，可删除-->
+    <script src="static/js1/personal_info.js"></script>
+
+</body>
+</html>
+{{end}}

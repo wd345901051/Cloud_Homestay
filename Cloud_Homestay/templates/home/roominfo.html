@@ -1,0 +1,531 @@
+{{define "home/roominfo.html"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to The Cloud Homestay</title>
+    <link rel="icon" href="images/icon.png" sizes="32*32">
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- bootstrap cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css">
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="static/css1/booking.css" />
+    <link rel="stylesheet" href="static/css1/normalize.css" />
+
+</head>
+<body>
+
+    <!-- header section starts     -->
+
+    <header class="header fixed-top" style="padding-top: 20px;">
+        <div class="container">
+            <div class="row align-items-center">
+                <a href="#" class="logo mr-auto"> <i class="fas fa-home fa-fw"></i> 云舍印象 </a>
+                <nav class="nav">
+                    <a href="home">首页</a>
+                    <a href="room">房间预定</a>
+                    {{if eq .isadmin 1}}
+                    <a href="admin/room">管理员界面</a>
+                    {{end}}
+                    <a href="personal">个人中心</a>
+                    <a href="#contact">联系我们</a>
+                 </nav>
+                <div class="icons">
+                    <div id="menu-btn" class="fas fa-bars"></div>
+                    <div id="login-btn" class="fas fa-user">{{.name}}</div>
+                    <div id="logout-btn" class="fas fa-sign-out-alt"></div>
+                </div>
+                <a href="rmsession" style="color: white;text-decoration: dashed;">退出</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="de_container">
+        <div class="w">
+            <div class="crumb_wrap">
+                <a href="#">首页</a> >
+                <a href="#">房间预定</a> >
+                <a href="#">{{.room.Title}}</a>
+            </div>
+            <div class="product_intro">
+                <div class="preview_wrap fl">
+                    <div class="preview_img">
+                        <img src="{{.room.Img}}" width="100%" alt="">
+                        <div class="mask"></div>
+                        <div class="big">
+                            <img src="{{.room.Img}}" width="800px" alt="" class="bigimg">
+                        </div>
+                    </div>
+                    <div class="preview_list">
+                        <a href="javascript:;" class="arrow_prev">
+                            < </a> <a href="javascript:;" class="arrow_next">>
+                                </a>
+                                <ul class="list_item">
+                                    <li class="current">
+                                        <img src="{{.room.Img}}" alt="" width="56px">
+                                    </li>
+                                    <li><img src="{{.room.Img}}" alt="" width="56px"></li>
+                                    <li><img src="{{.room.Img}}" alt="" width="56px"></li>
+                                    <li><img src="{{.room.Img}}" alt="" width="56px"></li>
+                                    <li><img src="{{.room.Img}}" alt="" width="56px"></li>
+                                </ul>
+                    </div>
+                </div>
+                <div class="itemInfo_wrap fr">
+                    <div class="sku_name">
+                        {{.room.Title}}
+                    </div>
+                    <div class="news">
+                        【暑期钜惠】夏季特惠 9.5 折
+                        周租优惠 9 折
+                        月租优惠 7 折
+                        连住优惠 满 5 天 9.3 折
+                        连住优惠 满 3 天 9.5 折
+                        连住优惠 满 2 天 9.7 折
+                    </div>
+                    <div class="summary">
+                        <dl class="summary_price">
+                            <dd>
+                                <i class="price">¥{{.room.Price}}/晚</i>
+                                <a href="#">还剩1间</a>
+                                <div class="remark">累计评价1000+</div>
+                            </dd>
+                        </dl>
+                        </dl>
+                        <dl class="summary_support">
+                            <dt>房间号</dt>
+                            <dd>{{.room.RoomNum}}</dd>
+                        </dl>
+                        <dl class="summary_support">
+                            <dt>房间位置</dt>
+                            <dd>西侧二楼</dd>
+                        </dl>
+                        <dl class="summary_support">
+                            <dt>房间类型</dt>
+                            <dd>1室1厅1卫</dd>
+                        </dl>
+                        <dl class="summary_support">
+                            <dt>入住/退房</dt>
+                            <dd>入住时间 下午2:00后 退房时间 中午12:00</dd>
+                        </dl>
+
+
+                        <dl class="icons-container">
+                            <dt class="icons">
+                                <i class="fas fa-bed"></i>
+                                <h5>一张双人床</h5>
+                            </dt>
+                            <dt class="icons">
+                                <i class="fas fa-toilet"></i>
+                                <h5>一个独立卫生间</h5>
+                            </dt>
+                            <dt class="icons">
+                                <i class="fas fa-user-friends"></i>
+                                <h5>可住2人</h5>
+                            </dt>
+                            <dt class="icons">
+                                <i class="fas fa-utensils"></i>
+                                <h5>2份早餐</h5>
+                            </dt>
+                            <dt class="icons">
+                                <i class="fas fa-wifi"></i>
+                                <h5>WIFI</h5>
+                            </dt>
+                            <dt class="icons">
+                                <i class="fas fa-suitcase"></i>
+                                <h5>行李寄存</h5>
+                            </dt>
+                        </dl>
+
+                        <div class="choose_btns">
+                            <!-- <div class="choose_amount">
+                            <input type="text" value="1">
+                            <a href="javascript:;" class="add">+</a>
+                            <a href="javascript:;" class="reduce">-</a>
+                        </div> -->
+                            <div class="booking-btn" id="booking-btn">立即订购</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product_detail">
+                <div class="aside fl">
+                    <div class="tab_list">
+                        <ul>
+                            <li class="first_tab current">猜你喜欢</li>
+                        </ul>
+                    </div>
+                    <div class="tab_con">
+                        <ul>
+                            <li>
+                                <img src="https://dimg04.c-ctrip.com/images/200n15000000yn7wtC1F0_W_1080_808_R5_D.jpg_.webp"
+                                    width="100%" alt="">
+                                <h5>未·日央别墅套房</h5>
+                                <div class="aside_price">￥599.0/晚</div>
+                                <a href="#" class="as_addcar">详情</a>
+                            </li>
+                            <li>
+                                <img src="https://dimg04.c-ctrip.com/images/200n15000000yn7wtC1F0_W_1080_808_R5_D.jpg_.webp"
+                                    width="100%" alt="">
+                                <h5>酉·日晏庭院套房</h5>
+                                <div class="aside_price">￥599.0/晚</div>
+                                <a href="#" class="as_addcar">详情</a>
+                            </li>
+                            <li>
+                                <img src="https://dimg04.c-ctrip.com/images/200n15000000yn7wtC1F0_W_1080_808_R5_D.jpg_.webp"
+                                    width="100%" alt="">
+                                <h5>申·日稷庭院套房</h5>
+                                <div class="aside_price">￥599.0/晚</div>
+                                <a href="#" class="as_addcar">详情</a>
+                            </li>
+                            <li>
+                                <img src="https://dimg04.c-ctrip.com/images/200n15000000yn7wtC1F0_W_1080_808_R5_D.jpg_.webp"
+                                    width="100%" alt="">
+                                <h5>巳·隅中庭院套房</h5>
+                                <div class="aside_price">￥599.0/晚</div>
+                                <a href="#" class="as_addcar">详情</a>
+                            </li>
+                            <li>
+                                <img src="https://dimg04.c-ctrip.com/images/200n15000000yn7wtC1F0_W_1080_808_R5_D.jpg_.webp"
+                                    width="100%" alt="">
+                                <h5>午·亭午庭院套房</h5>
+                                <div class="aside_price">￥599.0/晚</div>
+                                <a href="#" class="as_addcar">详情</a>
+                            </li>
+                            <li>
+                                <img src="https://dimg04.c-ctrip.com/images/200v15000000yzcimE71E_W_1080_808_R5_D.jpg_.webp"
+                                    width="100%" alt="">
+                                <h5>辰·朝食观景套房</h5>
+                                <div class="aside_price">￥599.0/晚</div>
+                                <a href="#" class="as_addcar">详情</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="detail fr">
+                    <div class="detail_tab_list">
+                        <ul>
+                            <li class="current">房间介绍</li>
+                            <li>预定须知</li>
+                            <li>用户评价（100+）</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail_tab_con">
+                        <div class="item" style="width: 100%;">
+                            <p style="font-size: small;margin: 2rem;line-height: 3rem;">
+                            <h1>房间</h1><br>
+                            酒店共十四间客房<br>
+
+                            分别以良辰（金）、吉日（银）及子丑寅卯辰巳午未申酉戌亥十二时辰命名<br>
+
+                            每间房风格不一带给您不一样的视觉体验<br>
+
+                            每间客房的面积都在80平以上<br>
+
+                            都有不一样的超豪华浴缸🛀🏻<br>
+
+                            夏日山中自然凉爽<br>
+
+                            冬日全屋有地暖🔥<br>
+                            </p>
+                            <!--                                  
+                        <div style="width: 600px;margin: 0 auto;">
+                            <img src="images/details/x1.jpg" alt="">
+                            <img src="images/details/x2.jpg" alt="">
+                            <img src="images/details/x3.jpg" alt="">
+                        </div> -->
+                        </div>
+                        <div class="item" style="display: none;">
+                            <ul class="item_info line">
+                                <li>
+                                    <h3>配套设施</h3>
+                                    <dl class="icons-container">
+                                        <dt class="icons">
+                                            <i class="fas fa-wifi"></i>
+                                            <h5>WIFI</h5>
+                                        </dt>
+                                        <dt class="icons">
+                                            <i class="fas fa-tv"></i>
+                                            <h5>电视</h5>
+                                        </dt>
+                                        <dt class="icons">
+                                            <i class="fas fa-snowflake"></i>
+                                            <h5>空调</h5>
+                                        </dt>
+                                        <dt class="icons">
+                                            <i class="fas fa-shower"></i>
+                                            <h5>淋浴</h5>
+                                        </dt>
+                                        <dt class="icons">
+                                            <i class="fas fa-couch"></i>
+                                            <h5>沙发</h5>
+                                        </dt>
+                                        <dt class="icons">
+                                            <i class="fas fa-utensils"></i>
+                                            <h5>餐饮</h5>
+                                        </dt>
+                                        <dt class="icons">
+                                            <i class="fas fa-swimming-pool"></i>
+                                            <h5>游泳池</h5>
+                                        </dt>
+                                        <dt class="icons">
+                                            <i class="fas fa-suitcase"></i>
+                                            <h5>行李寄存</h5>
+                                        </dt>
+                                        <dt class="icons">
+                                            <i class="fas fa-spa"></i>
+                                            <h5>Spa</h5>
+                                        </dt>
+                                        <dt class="icons">
+                                            <i class="fas fa-tv"></i>
+                                            <h5>电视</h5>
+                                        </dt>
+                                        <dt class="icons">
+                                            <i class="fas fa-street-view"></i>
+                                            <h5>街景</h5>
+                                        </dt>
+                                    </dl>
+                                </li>
+                                <li>
+                                    <h3>预定须知</h3>
+                                    <dl>
+                                        <dl>
+                                            <dd>退款规则</dd>
+                                            <dt>入住前7天12:00前如申请退款，订金全额退;</dt>
+                                        </dl>
+                                        <dl>
+                                            <dd></dd>
+                                            <dt>入住后如提前退房，扣除已入住天数房款总额，再扣除未入住天数房款总额的50%;</dt>
+                                        </dl>
+                                        <dl>
+                                            <dd></dd>
+                                            <dt>中午12:00之后默认当天已经入住，申请退款和提前退房时间以系统记录的时间为准</dt>
+                                        </dl>
+                                        <dl>
+                                            <dd>安全预定</dd>
+                                            <dt>为了保护您的账号隐私及付款安全，请勿妄信第三方预订代理提供的折扣或礼金券，</dt>
+                                            <dt>也不要在本网站之外汇款或沟通。</dt>
+                                        </dl>
+                                        <dl>
+                                            <dd>发票服务</dd>
+                                            <dt>如有需要请要求房东提供发票</dt>
+                                        </dl>
+                                    </dl>
+                                </li>
+                                <li>
+                                    <h3>费用须知</h3>
+                                    <dl>
+                                        <dl>
+                                            <dd>押金</dd>
+                                            <dt>提供免押服务</dt>
+                                        </dl>
+                                        <dl>
+                                            <dd>加客</dd>
+                                            <dt>不可加客</dt>
+                                        </dl>
+                                    </dl>
+                                </li>
+                                <li>
+                                    <h3>入住须知</h3>
+                                    <dl>
+                                        <dl>
+                                            <dd>入住/退房</dd>
+                                            <dt>12:00-次日3:00间可入住，12:00前需退房</dt>
+                                        </dl>
+                                        <dl>
+                                            <dd>房屋守则</dd>
+                                            <dt>不允许举办派对和活动
+                                                不适合婴幼儿（2岁以内）入住
+                                                不允许携带宠物
+                                                禁止吸烟</dt>
+                                        </dl>
+                                    </dl>
+                                </li>
+                                <li>
+                                    <h3>出行信息</h3>
+                                    <dl>
+                                        <dl>
+                                            <dd>周边热门</dd>
+                                            <dt>大理古城 喜洲古镇 洱海 南诏风情岛 崇圣寺三塔</dt>
+                                        </dl>
+                                        <dl>
+                                            <dd>附近交通</dd>
+                                            <dt>可乘坐8路公交车到大理古城</dt>
+                                        </dl>
+                                        <dl>
+                                            <dd>机场/火车</dd>
+                                            <dt>大理机场（约15公里）大理站（10公里）</dt>
+                                        </dl>
+                                    </dl>
+                                </li>
+                                <li>
+                                    <h3>价格说明</h3>
+                                    <dl>
+                                        <dl>
+                                            <dt>“划线价格为参考价，该价格指产品/服务的门市价、服务提供者的指导价、零售价、市场价或该产品/服务曾经展示过的销售价等，并非原价；由于产品/服务信息实时更新、服务提供者差异、市场价格波动等原因，该价格可能会与您预订时展示的不一致，仅供您参考。
+
+                                                未划线价格指产品或服务的实时标价，该价格是在划线价基础上根据服务提供者让利、产品或服务参加活动、或会员使用优惠券的不同而计算出的优惠后的金额。具体成交价格以订单结算页价格为准。”
+                                            </dt>
+                                        </dl>
+                                    </dl>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="item" style="display: none;">
+                            <div class="rate">
+                                <div class="rate-l fl">
+                                    <strong>100<span>%</span></strong><br><span>好评度</span>
+                                </div>
+                                <div class="rate-r fl">
+                                    <h3>房客印象</h3>
+                                    <ul>
+                                        <li>"如实描述"</li>
+                                        <li>"高性价比"</li>
+                                        <li>"位置便利"</li>
+                                        <li>"入住体验好"</li>
+                                        <li>"干净卫生"</li>
+                                        <li>"设施齐全"</li>
+                                        <li>"有设计感"</li>
+                                        <li>"服务周到"</li>
+                                        <li>"行李寄存"</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div>
+                                <form action="comment" method="post" target="myiframe">
+                                    <ul class="comment-main">
+                                        <li>
+                                            <a href="#"><img style="width: 48px;height:48px;" src="{{.user.Icon}}" alt=""></a>
+                                            <div class="comment-main-r" style="border: none;">
+                                                <div class="comment">
+                                                    <textarea name="content" id="" cols="30" rows="4"></textarea>
+                                                </div>
+
+                                                <div class="publish">
+                                                    <input type="submit" onclick="alert('提交成功，请刷新页面')" value="发布">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <input type="text" style="display: none;" name="roomid" value="{{.room.ID}}" id="">
+                                        <input type="text" style="display: none;" name="userid" value="{{.user.ID}}" id="">
+                                        <input type="text" style="display: none;" name="usericon" value="{{.user.Icon}}" id="">
+                                    </ul>
+                                </form>
+                            </div>
+                            
+                            <div class="comment-info">
+                                <a href="#">全部评价 ({{.cnt}})</a>
+                            </div>
+                            <ul class="comment-main">
+
+                                {{range $key,$value := .comments}}
+                                <li>
+                                    <a href="#"><img style="width: 48px;height:48px;" src="{{$value.UserIcon}}" alt=""></a>
+                                    <div class="comment-main-r">
+                                        <div class="main-top">
+                                            *** (匿名) 评论于 2019年11月02日 17:46
+                                        </div>
+                                        <div class="main-bd">
+                                            {{$value.Content}}
+                                        </div>
+                                    </div>
+                                </li>
+                                {{end}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- login form starts -->
+
+    <div class="booking-form">
+        <form name="reserveform" class="order" action="order" method="post" target="myiframe" enctype="multipart/form-data">
+            <div id="close-booking-form" class="fas fa-times"></div>
+            <a href="#" class="logo mr-auto"> <i class="fas fa-home fa-fw"></i>云舍印象</a>
+            <p>
+            <h1>客房预订</h1>
+            </p>
+            <p>
+                <label for="name">姓名</label>
+                <input type="text" name="name" size=20 required>
+            </p>
+            <p style="display: none;">
+                <label for="name">房间ID</label>
+                <input type="text" name="roomid" value="{{.room.ID}}" size=20 required>
+            </p>
+            <p>
+                <label for="tel">联系电话</label>
+                <input type="text" name="tel" size=20 required>
+            </p>
+            <p>
+                <label for="id-number">身份证号</label>
+                <input type="text" name="id-number" size=20 required>
+            </p>
+            <p>
+                <label for="ruzhu">入住人数</label>
+                <input type="number" id="num" name="number" min="1" max="6" style="width: 32%;">
+            </p>
+            <p>
+                <label for="ruzhu">入住日期</label>
+                <input type="date" id="timein" name="timein">
+            </p>
+            <p>
+                <label for="tuifang">退房日期</label>
+                <td align="left"><input type="date" id="timeout" name="timeout">
+            </p>
+            <p><label for="beizhu" id="content">备注</label></p>
+            <p><textarea name="content" cols="60" rows="5">欢迎留言</textarea></p>
+            <p>
+                <center>
+                    <input class="orderform" type="submit" onclick="alert('提交成功')" value="确认" class="button">
+                    <input type="reset" value="重置" class="button">
+                </center>
+            </p>
+        </form>
+        </form>
+    </div>
+    <iframe  width=0 height=0 frameborder=0 id="myiframe" name="myiframe"></iframe>
+    <!-- newsletter section starts  -->
+
+    <section class="newsletter">
+        <div class="container">
+            <h3>一期一会</h3>
+            <p>订阅我们，以关注最新动态</p>
+            <form action="attention" method="post" enctype="multipart/form-data" style="width: 120px;">
+                <input type="submit" value="订阅" class="link-btn">
+             </form>
+        </div>
+    </section>
+
+    <!-- newsletter section ends -->
+
+    <!-- footer section starts  -->
+
+    <section class="footer container">
+        <a href="#" class="logo"> <i class="fas fa-home fa-fw"></i> 云舍印象 </a>
+        <p class="credit"> created by <span>mr. Bai </span> | Copyright 2019-2022</p>
+        <div class="share">
+            <a href="#" class="fab fa-airbnb"></a>
+            <a href="#" class="fab fa-weibo"></a>
+            <a href="#" class="fab fa-weixin"></a>
+            <a href="#" class="fab fa-fonticons"></a>
+        </div>
+    </section>
+
+    <!-- footer section ends -->
+
+    <!-- custom js file link  -->
+    <script src="static/js1/jquery-3.0.0.min.js"></script>
+    <script src="static/js1/booking.js"></script>
+
+
+</body>
+</html>
+{{end}}

@@ -1,0 +1,69 @@
+{{define "login/login.html"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册登录界面</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+<link rel="stylesheet" href="static/css/login.css">
+</head>
+<body>
+<div class="container right-panel-active">
+    
+    <!-- 登录 -->
+    <div class="container_form container--signup">
+        <form action="userlogin" class="form" id="form2" method="post" enctype="multipart/form-data">
+            <h2 class="form_title">Sign In</h2>
+            <input type="email" name="email" placeholder="Email" class="input" required />
+            <input type="password" name="password" placeholder="Password" class="input" required />
+            <a href="#" class="link">Forgot your password?</a>
+            <input type="submit" class="btn" value="Sign In">
+        </form>
+    </div>
+
+    <!-- 注册 -->
+    <div class="container_form container--signin">
+        <form action="userlogup" class="form" id="form1" method="post" enctype="multipart/form-data">
+            <h2 class="form_title">Sign Up</h2>
+            <input type="email" name="email1" id="email1" placeholder="Email" class="input" required />
+            <input type="password" name="password" id="password" placeholder="Password" class="input" required />
+            <input type="text" id="code1" name="code1" placeholder="Auth Code" class="input" required />
+            <div style="width: 100%;">
+                <div style="float: left;">
+                    <input type="checkbox" id="showPwd" style="text-align: left;">
+                    <label for="showPwd" style="text-align: left;">Show Password</label>
+                </div>
+                <a  id="getCode" >Get Code</a>  
+        </div>
+        <input type="submit" class="btn" value="Sign Up">
+        </form>
+        <form action="login" name="form3" id="form3" method="get" target="frameName" enctype="multipart/form-data">
+            <input type="email" name="email2" id="email2"/>
+            <input type="text" name="code2" id="code2">
+            <input type="submit" id="submit" value="">
+
+        </form>
+        <iframe src="" frameborder="0" name="frameName"></iframe>
+    </div>
+    <!-- 浮层 -->
+    <div class="container_overlay">
+        <div class="overlay">
+            <div class="overlay_panel overlay--right">
+                <button class="btn" id="signUp">Sign In</button>
+            </div>
+            <div class="overlay_panel overlay--left">
+                <button class="btn" id="signIn">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 背景 -->
+<div class="slidershow">
+    <div class="slidershow--image" style="background-image: url('https://source.unsplash.com/wnbBH_CGOYQ')"></div>
+</div>
+
+<!-- partial -->
+<script src="static/js/login.js"></script>
+</body>
+</html>
+{{end}}
