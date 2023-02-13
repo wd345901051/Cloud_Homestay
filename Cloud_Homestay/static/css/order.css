@@ -1,0 +1,369 @@
+/* *{
+    margin: 0;
+    padding: 0;
+} */
+.wrapperBox{
+    width: 1229px;
+    height: 800px;
+    background-color:#f0ece9 ;
+    margin-left: 1%;
+}
+/* .header{
+    width: 1200px;
+    height: 111px;
+    margin: 0 auto;
+} */
+
+.headerTitle{
+    width: 1200px;
+    height: 56px;
+}
+.headerButton{
+    width: 205px;
+    height: 40px;
+    line-height: 40px;
+}
+.container{
+    width: 1200px;
+    /* height: 455px; */
+    margin: 0 auto;
+    font-size: 12px;
+    text-align: center;
+    margin-top: -5%;
+}
+.container01{
+    width: 1200px;
+    /* height: 455px; */
+    margin: 0 auto;
+    font-size: 12px;
+    text-align: center; 
+    margin-top: 50px;
+}
+.foot{
+    width: 1200px;
+    height: 79px;
+    margin: 0 auto;
+}
+/*.pageInformation{*/
+/*    width: 226px;*/
+/*    height: 79px;*/
+/*    background-color: blue;*/
+/*    float: left;*/
+/*}*/
+/**/
+.pageButton{
+    width: 190px;
+    height: 100px;
+    line-height: 79px;
+    float: right;
+
+}
+.addButton{
+    width: 93px;
+    height: 35px;
+    background-color: #33b792;
+    border: 1px solid #000000;
+    color: #fff;
+    cursor: pointer;
+    /* margin-left: 35%; */
+    float: left;
+}
+#deleteButton{
+    width: 93px;
+    height: 35px;
+    background-color: #33b792;
+    border: 1px solid #000000;
+    color: #fff;
+    margin-left: 14px;
+    cursor: pointer;
+    /* float: right; */
+   
+}
+#prePageButton{
+    width: 88px;
+    height: 50px;
+    background-color: #33b792;
+    border: 1px solid #000000;
+    color: #fff;
+    /* cursor: pointer; */
+    margin-top: 10%;
+}
+#nextPageButton{
+    width: 88px;
+    height: 50px;
+    background-color: #33b792;
+    border: 1px solid #000000;
+    margin-left: 5px;
+    color: #fff;
+    /* cursor: pointer; */
+    margin-top: 10%;
+}
+.viewInf ,.updateInf{
+    color: #ff0000;
+    cursor: pointer;
+}
+.updateInf{
+    margin-left: 9px;
+}
+.container01 table{
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: -40px;
+
+}
+.container01 td{
+    height: 45px;
+}
+.tableHeaher{
+    height: 55px;
+    background-color: #dadee1;
+}
+tr.trHover:hover{
+    background-color: red;
+}
+
+
+
+
+/*headerStyle */
+.headerLine{width: 1200px;color: #999999;text-align: center;font-size: 24px;}
+.headerLine:before,.headerLine:after{content: "";width: 406px;border-top: 4px #c3a080 solid; display: inline-block;
+    vertical-align: middle;}
+.headerLine:before{margin-right: 98px;}
+.headerLine:after{margin-left: 98px;}
+/*end    */
+
+
+/*cintainerStyle  */
+i{font-style: normal;}
+td{
+    height: 40px;
+}
+
+
+#addmodal{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: rgba(0,0,0,0.5);
+    display: none;
+}
+#viewmodal{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: rgba(0,0,0,0.5);
+    display: none;
+}
+#movemodal{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: rgba(0,0,0,0.5);
+    display: none;
+}
+.modal-dialog{
+    position: relative;
+    width: 500px;
+    margin: 0px auto;
+    background: white;
+    border-radius: 5px;
+}
+.modal-header {
+    border-bottom: 1px solid #e5e5e5;
+    color: #fff;
+    background-color: #555;
+    height: 50px;
+    line-height: 40px;
+
+    padding-left: 8px;
+}
+.modal-header>i{
+    font-weight: bold;
+    color: #ADADAD;
+    float: right;
+    cursor: pointer;
+}
+.modal-body {
+    /* position: relative; */
+    text-align: center;
+}
+.modal-body input{
+    width: 202px;
+    border: 1px solid #a9a9a9;
+    outline: none;
+    margin: 10px;
+}
+.modal-footer {
+    padding: 15px;
+    text-align: right;
+    border-top: 1px solid #e5e5e5;
+}
+.addButton_ok{
+    width: 93px;
+    height: 32px;
+    border-radius: 2px;
+    background: #924c4c;
+    color: #808080;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid #aeaeae;
+}
+.addButton_no{
+    width: 93px;
+    height: 32px;
+    border-radius: 2px;
+    background: #fff;
+    color: #808080;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid #aeaeae;
+}
+.pageInformation{
+    width: 226px;
+    height: 16px;
+    padding-top: 29px;
+    font-size: 15px;
+    line-height: 16px;
+    float: left;
+}
+
+.updatabtn_ok{
+    width: 93px;
+    height: 38px;
+    border-radius: 4px;
+    background: #fff;
+    color: #808080;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid #aeaeae;
+}
+.updatabtn_no{
+    width: 93px;
+    height: 38px;
+    border-radius: 4px;
+    background: #fff;
+    color: #808080;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid #aeaeae;
+}
+.img-circle {
+    border-radius: 49%;
+    width: 40%;
+    height: 100%;
+  }
+  .input-group {
+    /* position: relative; */
+    display: table;
+    border-collapse: separate;
+    width: 30%;
+    float: left;
+    display:inline;
+    cursor: pointer;
+  }
+  .downorder{
+    cursor: pointer;
+
+  }
+  /* .down{
+   width: 700px;
+    height: 30px;
+    margin-left: 5.5%;
+  } */
+  .down
+		{
+			width: 1140px;
+			background:#f0ece9;
+			margin: 100px auto;
+			display: flex;
+			display: -webkit-flex; /* Safari */
+            margin-top: 40px;
+		}
+		.downorder
+		{
+			flex:1;
+			height: 40px;
+			/* border:1px solid black; */
+            float: left;
+		}
+        .input-group
+        {
+			flex:3;
+			height: 40px;
+			/* border:1px solid black; */
+            margin-right: 30%;
+		}
+        .headerButton{
+            
+                flex:3;
+                height: 40px;
+                /* border:1px solid black; */ 
+                width: auto;
+        }
+        .input-group .form-control, .input-group-addon, .input-group-btn {
+            display: table-cell;
+            /* margin-top: 1.5%; */
+          }
+          .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 35%;
+          }
+
+
+  /* button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    margin-left: 7%;
+  } */
+  .Abutton{
+    width: 205px;
+    height: 40px;
+    line-height: 40px;
+}
+.Abutton{
+    width: 93px;
+    height: 35px;
+    background-color: #33b792;
+    border: 1px solid #000000;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 35%;
+}
+#Dbutton{
+    width: 93px;
+    height: 35px;
+    background-color: #33b792;
+    border: 1px solid #000000;
+    color: #fff;
+    margin-left: 14px;
+    cursor: pointer;
+    /* float: right; */
+   
+}
+#containerTable{
+    width:100%;
+    
+}
+.button01{
+    width:93px;
+    height:35px;
+    background-color: #33b792;
+    border: 1px solid #000000;
+    color: #fff;
+}
+#button02{
+    width:93px;
+    height:35px;
+    background-color: #33b792;
+    border: 1px solid #000000;
+    color: #fff; 
+}
