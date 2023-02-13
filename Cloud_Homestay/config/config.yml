@@ -1,0 +1,15 @@
+mysql:
+  driverName: mysql
+  host: 8.130.106.57
+  port: 3306
+  database: cloud_homestay
+  username: root
+  password: 123456
+  charset: utf8
+
+redis:
+  address: 8.130.106.57:6379
+  password: ""
+  db: 0
+
+
